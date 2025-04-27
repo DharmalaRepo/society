@@ -19,14 +19,14 @@ public class SocietyFlatController {
         return service.createFlat(flat);
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<SocietyFlat> getAll() {
         return service.getAllFlats();
     }
 
     @GetMapping("/society/{societyId}")
-    public List<SocietyFlat> getBySocietyId(@PathVariable Integer societyId) {
-        return service.getFlatsBySocietyId(societyId);
+    public List<SocietyFlat> getBySocietyId(@PathVariable String societyId) {
+        return service.getFlatsBySocietyIdentifier(societyId);
     }
 
     @PutMapping("/{id}")

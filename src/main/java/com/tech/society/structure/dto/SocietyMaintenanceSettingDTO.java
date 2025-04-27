@@ -1,18 +1,13 @@
-package com.tech.society.structure.models;
+package com.tech.society.structure.dto;
 
+import com.tech.society.structure.models.SocietyMaintenanceSetting;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Document(collection = "society_maintenance_settings")
-public class SocietyMaintenanceSetting {
+public class SocietyMaintenanceSettingDTO {
 
     @Id
     private String id;
@@ -86,5 +81,14 @@ public class SocietyMaintenanceSetting {
 
     public void setIsActive(int isActive) {
         this.isActive = isActive;
+    }
+
+    public SocietyMaintenanceSetting toEntity() {
+        SocietyMaintenanceSetting entity = new SocietyMaintenanceSetting();
+        entity.setSocietyIdentifier(this.societyIdentifier);
+        entity.setFrequency(this.frequency);
+        entity.setAmount(this.amount);
+        entity.setDueDate(dueDate);
+        return entity;
     }
 }

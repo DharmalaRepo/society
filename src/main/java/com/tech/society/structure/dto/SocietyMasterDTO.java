@@ -1,17 +1,14 @@
-package com.tech.society.structure.models;
+package com.tech.society.structure.dto;
 
+import com.tech.society.structure.models.SocietyMaster;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Document(collection = "society_master")
-public class SocietyMaster {
+
+public class SocietyMasterDTO {
 
     @Id
     private String id;
@@ -149,5 +146,19 @@ public class SocietyMaster {
 
     public void setIsActive(int isActive) {
         this.isActive = isActive;
+    }
+
+    public SocietyMaster toEntity() {
+        SocietyMaster entity = new SocietyMaster();
+        entity.setName(this.name);
+        entity.setAddress(this.address);
+        entity.setCity(this.city);
+        entity.setState(this.state);
+        entity.setCountry(this.country);
+        entity.setPincode(this.pincode);
+        entity.setRegistrationNumber(this.registrationNumber);
+        entity.setSocietyIdentifier(this.societyIdentifier);
+        entity.setIsActive(1);
+        return entity;
     }
 }

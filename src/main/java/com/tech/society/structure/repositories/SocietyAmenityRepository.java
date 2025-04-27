@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface SocietyAmenityRepository  extends MongoRepository<SocietyAmenity, String> {
 
-    List<SocietyAmenity> findBySocietyId(Integer societyId);
+    List<SocietyAmenity> findBySocietyIdentifier(String societyIdentifier);
 
 }

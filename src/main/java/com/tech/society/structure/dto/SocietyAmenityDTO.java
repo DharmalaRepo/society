@@ -1,16 +1,11 @@
-package com.tech.society.structure.models;
+package com.tech.society.structure.dto;
 
-        import lombok.*;
-        import org.springframework.data.annotation.Id;
-        import org.springframework.data.mongodb.core.mapping.Document;
+import com.tech.society.structure.models.SocietyAmenity;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Document(collection = "society_amenities")
-public class SocietyAmenity {
+public class SocietyAmenityDTO {
 
     @Id
     private String id;
@@ -75,5 +70,14 @@ public class SocietyAmenity {
 
     public void setIsActive(int isActive) {
         this.isActive = isActive;
+    }
+
+    public SocietyAmenity toEntity() {
+        SocietyAmenity entity = new SocietyAmenity();
+        entity.setSocietyIdentifier(this.societyIdentifier);
+        entity.setName(this.name);
+        entity.setDescription(this.description);
+        entity.setIsActive(1);
+        return entity;
     }
 }

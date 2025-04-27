@@ -25,8 +25,8 @@ public class SocietyFlatServiceImpl implements SocietyFlatService {
     }
 
     @Override
-    public List<SocietyFlat> getFlatsBySocietyId(Integer societyId) {
-        return repo.findBySocietyId(societyId);
+    public List<SocietyFlat> getFlatsBySocietyIdentifier(String societyIdentifier) {
+        return repo.findBySocietyIdentifier(societyIdentifier);
     }
 
     @Override

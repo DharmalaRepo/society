@@ -6,7 +6,7 @@ import java.util.List;
 public interface SocietyMaintenanceSettingService {
     SocietyMaintenanceSetting createSetting(SocietyMaintenanceSetting setting);
     List<SocietyMaintenanceSetting> getAllSettings();
-    List<SocietyMaintenanceSetting> getSettingsBySocietyId(Integer societyId);
+    SocietyMaintenanceSetting getSettingsBySocietyIdentifier(String societyIentifier);
     SocietyMaintenanceSetting updateSetting(String id, SocietyMaintenanceSetting setting);
     void deleteSetting(String id);
 }

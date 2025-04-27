@@ -25,8 +25,8 @@ public class SocietyAmenityServiceImpl implements SocietyAmenityService {
     }
 
     @Override
-    public List<SocietyAmenity> getAmenitiesBySocietyId(Integer societyId) {
-        return repository.findBySocietyId(societyId);
+    public List<SocietyAmenity> getAmenitiesBySocietyIdentifier(String societyIdentifier) {
+        return repository.findBySocietyIdentifier(societyIdentifier);
     }
 
     @Override

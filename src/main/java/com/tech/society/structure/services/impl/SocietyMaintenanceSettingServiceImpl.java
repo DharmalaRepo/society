@@ -25,8 +25,8 @@ public class SocietyMaintenanceSettingServiceImpl implements SocietyMaintenanceS
     }
 
     @Override
-    public List<SocietyMaintenanceSetting> getSettingsBySocietyId(Integer societyId) {
-        return repository.findBySocietyId(societyId);
+    public SocietyMaintenanceSetting getSettingsBySocietyIdentifier(String societyIdentifier) {
+        return repository.findBySocietyIdentifier(societyIdentifier);
     }
 
     @Override

@@ -1,16 +1,11 @@
-package com.tech.society.structure.models;
+package com.tech.society.structure.dto;
 
+import com.tech.society.structure.models.SocietyFlat;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Document(collection = "society_flats")
-public class SocietyFlat {
+public class SocietyFlatDTO {
 
     @Id
     private String id;
@@ -102,5 +97,15 @@ public class SocietyFlat {
 
     public void setIsActive(int isActive) {
         this.isActive = isActive;
+    }
+
+    public SocietyFlat toEntity() {
+        SocietyFlat entity = new SocietyFlat();
+        entity.setSocietyIdentifier(this.societyIdentifier);
+        entity.setBlockName(this.blockName);
+        entity.setFlatNumber(this.flatNumber);
+        entity.setType(this.type);
+        entity.setIsActive(1);
+        return entity;
     }
 }

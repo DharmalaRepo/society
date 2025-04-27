@@ -25,8 +25,8 @@ public class SocietyAmenityController {
     }
 
     @GetMapping("/society/{societyId}")
-    public List<SocietyAmenity> getBySociety(@PathVariable Integer societyId) {
-        return service.getAmenitiesBySocietyId(societyId);
+    public List<SocietyAmenity> getBySociety(@PathVariable String societyId) {
+        return service.getAmenitiesBySocietyIdentifier(societyId);
     }
 
     @PutMapping("/{id}")

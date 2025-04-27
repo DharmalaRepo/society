@@ -6,7 +6,7 @@ import java.util.List;
 public interface SocietyFlatService {
     SocietyFlat createFlat(SocietyFlat flat);
     List<SocietyFlat> getAllFlats();
-    List<SocietyFlat> getFlatsBySocietyId(Integer societyId);
+    List<SocietyFlat> getFlatsBySocietyIdentifier(String societyId);
     SocietyFlat updateFlat(String id, SocietyFlat flat);
     void deleteFlat(String id);
 }

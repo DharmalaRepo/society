@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: society
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: society
+  template:
+    metadata:
+      labels:
+        app: society
+    spec:
+      containers:
+        - name: society
+          image: dharmala/society:2504171
+          ports:
+            - containerPort: 8999

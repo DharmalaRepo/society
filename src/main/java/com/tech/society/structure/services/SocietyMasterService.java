@@ -6,10 +6,14 @@ import java.util.List;
 public interface SocietyMasterService {
     SocietyMaster createSociety(SocietyMaster societyMaster);
     List<SocietyMaster> getAllSocieties();
-    SocietyMaster getSocietyByCustomId(Integer customId);
+    SocietyMaster getSocietyBySocietyIdentifer(String societyIdentifer);
 
-    List<SocietyFlat> getFlatsBySocietyId(Integer societyId);
-    List<SocietyParking> getParkingBySocietyId(Integer societyId);
-    List<SocietyAmenity> getAmenitiesBySocietyId(Integer societyId);
-    List<SocietyMaintenanceSetting> getMaintenanceSettingsBySocietyId(Integer societyId);
+    List<SocietyFlat> getFlatsBySocietyIdentifer(String societyIdentifer);
+    List<SocietyParking> getParkingBySocietyIdentifer(String societyIdentifer);
+    List<SocietyAmenity> getAmenitiesBySocietyIdentifer(String societyIdentifer);
+    SocietyMaintenanceSetting getMaintenanceSettingsBySocietyIdentifer(String societyIdentifer);
+
+
+
+
 }

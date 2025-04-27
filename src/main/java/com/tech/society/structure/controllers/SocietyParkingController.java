@@ -17,7 +17,7 @@ public class SocietyParkingController {
 
     @PostMapping public SocietyParking create(@RequestBody SocietyParking p) { return service.create(p); }
     @GetMapping public List<SocietyParking> getAll() { return service.getAll(); }
-    @GetMapping("/society/{id}") public List<SocietyParking> getBySociety(@PathVariable Integer id) { return service.getBySocietyId(id); }
+    @GetMapping("/society/{id}") public List<SocietyParking> getBySociety(@PathVariable String id) { return service.getBySocietyIdentifier(id); }
     @PutMapping("/{id}") public SocietyParking update(@PathVariable String id, @RequestBody SocietyParking p) { return service.update(id, p); }
     @DeleteMapping("/{id}") public void delete(@PathVariable String id) { service.delete(id); }
 }

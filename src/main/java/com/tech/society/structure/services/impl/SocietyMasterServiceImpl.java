@@ -28,28 +28,28 @@ public class SocietyMasterServiceImpl implements SocietyMasterService {
     }
 
     @Override
-    public SocietyMaster getSocietyByCustomId(Integer customId) {
-        return societyMasterRepo.findByCustomId(customId)
+    public SocietyMaster getSocietyBySocietyIdentifer(String societyIdentifer) {
+        return societyMasterRepo.findBySocietyIdentifier(societyIdentifer)
                 .orElseThrow(() -> new RuntimeException("Society not found"));
     }
 
     @Override
-    public List<SocietyFlat> getFlatsBySocietyId(Integer societyId) {
-        return flatRepo.findBySocietyId(societyId);
+    public List<SocietyFlat> getFlatsBySocietyIdentifer(String societyIdentifer) {
+        return flatRepo.findBySocietyIdentifier(societyIdentifer);
     }
 
     @Override
-    public List<SocietyParking> getParkingBySocietyId(Integer societyId) {
-        return parkingRepo.findBySocietyId(societyId);
+    public List<SocietyParking> getParkingBySocietyIdentifer(String societyIdentifer) {
+        return parkingRepo.findBySocietyIdentifier(societyIdentifer);
     }
 
     @Override
-    public List<SocietyAmenity> getAmenitiesBySocietyId(Integer societyId) {
-        return amenityRepo.findBySocietyId(societyId);
+    public List<SocietyAmenity> getAmenitiesBySocietyIdentifer(String societyIdentifer) {
+        return amenityRepo.findBySocietyIdentifier(societyIdentifer);
     }
 
     @Override
-    public List<SocietyMaintenanceSetting> getMaintenanceSettingsBySocietyId(Integer societyId) {
-        return maintenanceRepo.findBySocietyId(societyId);
+    public SocietyMaintenanceSetting getMaintenanceSettingsBySocietyIdentifer(String societyIdentifer) {
+        return maintenanceRepo.findBySocietyIdentifier(societyIdentifer);
     }
 }

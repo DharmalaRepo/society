@@ -15,7 +15,7 @@ public class SocietyParkingServiceImpl implements SocietyParkingService {
 
     public SocietyParking create(SocietyParking p) { return repo.save(p); }
     public List<SocietyParking> getAll() { return repo.findAll(); }
-    public List<SocietyParking> getBySocietyId(Integer id) { return repo.findBySocietyId(id); }
+    public List<SocietyParking> getBySocietyIdentifier(String id) { return repo.findBySocietyIdentifier(id); }
     public SocietyParking update(String id, SocietyParking p) { p.setId(id); return repo.save(p); }
     public void delete(String id) { repo.deleteById(id); }
 }

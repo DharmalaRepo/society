@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SocietyMaintenanceSettingRepository extends MongoRepository<SocietyMaintenanceSetting, String> {
-    List<SocietyMaintenanceSetting> findBySocietyId(Integer societyId);
+    SocietyMaintenanceSetting findBySocietyIdentifier(String societyId);
 }

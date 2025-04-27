@@ -9,5 +9,5 @@ import java.util.Optional;
 import java.util.List;
 
 public interface SocietyParkingRepository  extends MongoRepository<SocietyParking, String> {
-    List<SocietyParking> findBySocietyId(Integer societyId);
+    List<SocietyParking> findBySocietyIdentifier(String societyIdentifier);
 }

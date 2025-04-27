@@ -25,8 +25,8 @@ public class SocietyMaintenanceSettingController {
     }
 
     @GetMapping("/society/{societyId}")
-    public List<SocietyMaintenanceSetting> getBySociety(@PathVariable Integer societyId) {
-        return service.getSettingsBySocietyId(societyId);
+    public SocietyMaintenanceSetting getBySociety(@PathVariable String societyIdentifer) {
+        return service.getSettingsBySocietyIdentifier(societyIdentifer);
     }
 
     @PutMapping("/{id}")

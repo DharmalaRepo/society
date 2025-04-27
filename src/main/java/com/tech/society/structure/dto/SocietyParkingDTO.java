@@ -1,18 +1,10 @@
-package com.tech.society.structure.models;
+package com.tech.society.structure.dto;
 
-import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.tech.society.structure.models.SocietyParking;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Document(collection = "society_parking")
-public class SocietyParking {
 
-    @Id
+public class SocietyParkingDTO {
+
     private String id;
     private int customId;
     private String societyIdentifier;
@@ -84,5 +76,14 @@ public class SocietyParking {
 
     public void setIsActive(int isActive) {
         this.isActive = isActive;
+    }
+
+    public SocietyParking toEntity() {
+        SocietyParking entity = new SocietyParking();
+        entity.setSocietyIdentifier(this.societyIdentifier);
+        entity.setSpotNumber(this.spotNumber);
+        entity.setType(this.type);
+        entity.setIsActive(1);
+        return entity;
     }
 }

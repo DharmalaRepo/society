@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface SocietyFlatRepository extends MongoRepository<SocietyFlat, String> {
-    List<SocietyFlat> findBySocietyId(Integer societyId);
+    List<SocietyFlat> findBySocietyIdentifier(String societyIdentifer);
 }
