@@ -45,44 +45,63 @@ public class SocietyRegistrationService {
         societyMasterRepository.save(master);
 
         // Save Flats
-        request.getFlats().forEach(flatDTO -> {
-            SocietyFlat flat = flatDTO.toEntity();
-            flat.setSocietyIdentifier(request.getSocietyMaster().getRegistrationNumber());
-            societyFlatRepository.save(flat);
-        });
+        if(null!=request.getFlats() && request.getFlats().size()>0){
+            request.getFlats().forEach(flatDTO -> {
+                SocietyFlat flat = flatDTO.toEntity();
+                flat.setSocietyIdentifier(request.getSocietyMaster().getRegistrationNumber());
+                societyFlatRepository.save(flat);
+            });
+        }
+
+
 
         // Save Amenities
-        request.getAmenities().forEach(amenityDTO -> {
-            SocietyAmenity amenity = amenityDTO.toEntity();
-            amenity.setSocietyIdentifier(request.getSocietyMaster().getRegistrationNumber());
-            societyAmenityRepository.save(amenity);
-        });
+        if(null!=request.getAmenities() && request.getAmenities().size()>0){
+            request.getAmenities().forEach(amenityDTO -> {
+                SocietyAmenity amenity = amenityDTO.toEntity();
+                amenity.setSocietyIdentifier(request.getSocietyMaster().getRegistrationNumber());
+                societyAmenityRepository.save(amenity);
+            });
+        }
+
 
         // Save Parking
-        request.getParkingSlots().forEach(parkingDTO -> {
-            SocietyParking parking = parkingDTO.toEntity();
-            parking.setSocietyIdentifier(request.getSocietyMaster().getRegistrationNumber());
-            societyParkingRepository.save(parking);
-        });
+        if(null!=request.getParkingSlots() && request.getParkingSlots().size()>0){
+            request.getParkingSlots().forEach(parkingDTO -> {
+                SocietyParking parking = parkingDTO.toEntity();
+                parking.setSocietyIdentifier(request.getSocietyMaster().getRegistrationNumber());
+                societyParkingRepository.save(parking);
+            });
+        }
+
 
         // Save Maintenance Settings
-        SocietyMaintenanceSetting setting = request.getMaintenanceSetting().toEntity();
-        setting.setSocietyIdentifier(request.getSocietyMaster().getRegistrationNumber());
-        societyMaintenanceSettingRepository.save(setting);
+        if(null!=request.getMaintenanceSetting() ){
+            SocietyMaintenanceSetting setting = request.getMaintenanceSetting().toEntity();
+            setting.setSocietyIdentifier(request.getSocietyMaster().getRegistrationNumber());
+            societyMaintenanceSettingRepository.save(setting);
+        }
+
 
         // Save Expense Categories
-        request.getExpenseCategories().forEach(expenseDTO -> {
-            ExpenseCategory expense = expenseDTO.toEntity();
-            expense.setSocietyIdentifier(request.getSocietyMaster().getRegistrationNumber());
-            expenseCategoryRepository.save(expense);
-        });
+        if(null!=request.getExpenseCategories() && request.getExpenseCategories().size()>0){
+            request.getExpenseCategories().forEach(expenseDTO -> {
+                ExpenseCategory expense = expenseDTO.toEntity();
+                expense.setSocietyIdentifier(request.getSocietyMaster().getRegistrationNumber());
+                expenseCategoryRepository.save(expense);
+            });
+        }
+
 
         // Save Staff Departments
-        request.getStaffDepartments().forEach(deptDTO -> {
-            com.example.societymanagement.model.StaffDepartment department = deptDTO.toEntity();
-            department.setSocietyIdentifier(request.getSocietyMaster().getRegistrationNumber());
-            staffDepartmentRepository.save(department);
-        });
+        if(null!=request.getStaffDepartments() && request.getStaffDepartments().size()>0){
+            request.getStaffDepartments().forEach(deptDTO -> {
+                com.example.societymanagement.model.StaffDepartment department = deptDTO.toEntity();
+                department.setSocietyIdentifier(request.getSocietyMaster().getRegistrationNumber());
+                staffDepartmentRepository.save(department);
+            });
+        }
+
     }
 
 

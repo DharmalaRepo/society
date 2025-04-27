@@ -13,6 +13,16 @@ public class SocietyRegistrationRequestDTO {
     private List<ExpenseCategoryDTO> expenseCategories;
     private List<StaffDepartmentDTO> staffDepartments;
 
+    private AdminUserDTO admin;
+
+    public AdminUserDTO getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(AdminUserDTO admin) {
+        this.admin = admin;
+    }
+
     public SocietyMasterDTO getSocietyMaster() {
         return societyMaster;
     }
