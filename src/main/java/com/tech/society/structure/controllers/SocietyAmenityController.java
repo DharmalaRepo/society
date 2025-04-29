@@ -2,6 +2,7 @@ package com.tech.society.structure.controllers;
 
 import com.tech.society.structure.models.SocietyAmenity;
 import com.tech.society.structure.services.SocietyAmenityService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,27 +16,29 @@ public class SocietyAmenityController {
     private SocietyAmenityService service;
 
     @PostMapping
-    public SocietyAmenity create(@RequestBody SocietyAmenity amenity) {
+    public SocietyAmenity create(@RequestBody SocietyAmenity amenity, HttpServletRequest httpRequest) {
+
         return service.createAmenity(amenity);
     }
 
     @GetMapping
-    public List<SocietyAmenity> getAll() {
+    public List<SocietyAmenity> getAll(HttpServletRequest httpRequest) {
+
         return service.getAllAmenities();
     }
 
     @GetMapping("/society/{societyId}")
-    public List<SocietyAmenity> getBySociety(@PathVariable String societyId) {
+    public List<SocietyAmenity> getBySociety(@PathVariable String societyId, HttpServletRequest httpRequest) {
         return service.getAmenitiesBySocietyIdentifier(societyId);
     }
 
     @PutMapping("/{id}")
-    public SocietyAmenity update(@PathVariable String id, @RequestBody SocietyAmenity amenity) {
+    public SocietyAmenity update(@PathVariable String id, @RequestBody SocietyAmenity amenity, HttpServletRequest httpRequest) {
         return service.updateAmenity(id, amenity);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable String id, HttpServletRequest httpRequest) {
         service.deleteAmenity(id);
     }
 }

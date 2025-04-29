@@ -17,7 +17,8 @@ public class SocietyFlatController {
     private SocietyFlatService service;
 
     @PostMapping
-    public SocietyFlat createFlat(@RequestBody SocietyFlat flat) {
+    public SocietyFlat createFlat(@RequestBody SocietyFlat flat, HttpServletRequest httpRequest) {
+
         return service.createFlat(flat);
     }
 
@@ -28,17 +29,18 @@ public class SocietyFlatController {
     }
 
     @GetMapping("/society/{societyId}")
-    public List<SocietyFlat> getBySocietyId(@PathVariable String societyId) {
+    public List<SocietyFlat> getBySocietyId(@PathVariable String societyId, HttpServletRequest httpRequest) {
         return service.getFlatsBySocietyIdentifier(societyId);
     }
 
     @PutMapping("/{id}")
-    public SocietyFlat update(@PathVariable String id, @RequestBody SocietyFlat flat) {
+    public SocietyFlat update(@PathVariable String id, @RequestBody SocietyFlat flat, HttpServletRequest httpRequest) {
         return service.updateFlat(id, flat);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable String id, HttpServletRequest httpRequest) {
+
         service.deleteFlat(id);
     }
 
