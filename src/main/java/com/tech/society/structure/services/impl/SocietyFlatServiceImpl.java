@@ -20,8 +20,8 @@ public class SocietyFlatServiceImpl implements SocietyFlatService {
     }
 
     @Override
-    public List<SocietyFlat> getAllFlats() {
-        return repo.findAll();
+    public List<SocietyFlat> getAllFlats(String societyIdentifier) {
+        return repo.findBySocietyIdentifier(societyIdentifier);
     }
 
     @Override

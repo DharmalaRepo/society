@@ -1,7 +1,9 @@
 package com.tech.society.structure.controllers;
 
+import com.tech.society.structure.dto.RequestContext;
 import com.tech.society.structure.models.SocietyFlat;
 import com.tech.society.structure.services.SocietyFlatService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +22,9 @@ public class SocietyFlatController {
     }
 
     @GetMapping("/getAll")
-    public List<SocietyFlat> getAll() {
-        return service.getAllFlats();
+    public List<SocietyFlat> getAll(HttpServletRequest httpRequest) {
+        RequestContext context = new RequestContext(httpRequest);
+        return service.getAllFlats(context.getSocietyIdentifier());
     }
 
     @GetMapping("/society/{societyId}")
@@ -38,4 +41,6 @@ public class SocietyFlatController {
     public void delete(@PathVariable String id) {
         service.deleteFlat(id);
     }
+
+
 }

@@ -1,23 +1,41 @@
 package com.tech.society.structure.services;
 
+import com.tech.society.structure.dto.AdminRegistrationRequest;
 import com.tech.society.structure.dto.SocietyDetailsResponseDTO;
 import com.tech.society.structure.dto.SocietyRegistrationRequestDTO;
 import com.tech.society.structure.models.*;
 import com.tech.society.structure.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.Base64;
 import java.util.List;
 
 @Service
 public class SocietyRegistrationService {
 
+    @Value("${login.service.base.url}")
+    private String loginServiceBaseUrl;
+
+    @Autowired
+    RestTemplate restTemplate;
+
+    @Autowired
     private final SocietyMasterRepository societyMasterRepository;
+    @Autowired
     private final SocietyFlatRepository societyFlatRepository;
+    @Autowired
     private final SocietyAmenityRepository societyAmenityRepository;
+    @Autowired
     private final SocietyParkingRepository societyParkingRepository;
+    @Autowired
     private final SocietyMaintenanceSettingRepository societyMaintenanceSettingRepository;
+    @Autowired
     private final ExpenseCategoryRepository expenseCategoryRepository;
+    @Autowired
     private final StaffDepartmentRepository staffDepartmentRepository;
 
     @Autowired
@@ -102,21 +120,52 @@ public class SocietyRegistrationService {
             });
         }
 
+        AdminRegistrationRequest admin = new AdminRegistrationRequest(request.getAdmin(), request.getSocietyMaster().getRegistrationNumber());
+        registerAdmin(admin);
+
     }
 
 
-    public SocietyDetailsResponseDTO getSocietyDetails(String societyId) {
+
+    public String registerAdmin(AdminRegistrationRequest request) {
+        String targetUrl = "http://localhost:9091/api/users/register-admin";  // Replace with actual URL
+
+        // Step 1: Build headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // Basic Auth Header
+        String plainCreds = "admin:admin123";
+        String base64Creds = Base64.getEncoder().encodeToString(plainCreds.getBytes());
+        headers.add("Authorization", "Basic " + base64Creds);
+
+        // Step 2: Build request entity (body + headers)
+        HttpEntity<AdminRegistrationRequest> entity = new HttpEntity<>(request, headers);
+
+        // Step 3: Make the REST call
+        ResponseEntity<String> response = restTemplate.exchange(
+                targetUrl,
+                HttpMethod.POST,
+                entity,
+                String.class
+        );
+
+        return response.getBody();
+    }
+
+
+    public SocietyDetailsResponseDTO getSocietyDetails(String societyIdentifier) {
         SocietyDetailsResponseDTO response = new SocietyDetailsResponseDTO();
 
-        SocietyMaster master = societyMasterRepository.findById(societyId)
+        SocietyMaster master = societyMasterRepository.findBySocietyIdentifier(societyIdentifier)
                 .orElseThrow(() -> new RuntimeException("Society not found"));
 
-        List<SocietyFlat> flats = societyFlatRepository.findBySocietyIdentifier(societyId);
-        List<SocietyAmenity> amenities = societyAmenityRepository.findBySocietyIdentifier(societyId);
-        List<SocietyParking> parkings = societyParkingRepository.findBySocietyIdentifier(societyId);
-        SocietyMaintenanceSetting maintenanceSetting = societyMaintenanceSettingRepository.findBySocietyIdentifier(societyId);
-        List<ExpenseCategory> expenseCategories = expenseCategoryRepository.findBySocietyIdentifier(societyId);
-        List<com.example.societymanagement.model.StaffDepartment> staffDepartments = staffDepartmentRepository.findBySocietyIdentifier(societyId);
+        List<SocietyFlat> flats = societyFlatRepository.findBySocietyIdentifier(societyIdentifier);
+        List<SocietyAmenity> amenities = societyAmenityRepository.findBySocietyIdentifier(societyIdentifier);
+        List<SocietyParking> parkings = societyParkingRepository.findBySocietyIdentifier(societyIdentifier);
+        SocietyMaintenanceSetting maintenanceSetting = societyMaintenanceSettingRepository.findBySocietyIdentifier(societyIdentifier);
+        List<ExpenseCategory> expenseCategories = expenseCategoryRepository.findBySocietyIdentifier(societyIdentifier);
+        List<com.example.societymanagement.model.StaffDepartment> staffDepartments = staffDepartmentRepository.findBySocietyIdentifier(societyIdentifier);
 
         // Set to response
         response.setSocietyMaster(master);
